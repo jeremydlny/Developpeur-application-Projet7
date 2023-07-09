@@ -1,114 +1,222 @@
-// Récupération des données de l'API et affichage des recettes et des filtres
-async function init() {
-    let recipes = await getRecipes();
-    let filters = getFilters();
-    displayRecipes(recipes);
-    displayFilters(filters);
-}
+document.addEventListener("DOMContentLoaded", function () {
 
-init();
+  let newRecipes = [];
 
-// Récupération des recettes depuis le fichier recipes.js
-async function getRecipes() {
-    try {
-        const response = await fetch("http://localhost:5501/data/recipes.js");
-        if (response.ok) {
-            const recipes = await response.json();
-            return recipes;
-        } else {
-            throw new Error("Failed to fetch recipes data.");
-        }
-    } catch (error) {
-        console.error(error.message);
-    }
-}
+  async function init() {
+    const { recipes } = await getDataApi();
+    newRecipes = recipes;
 
-// Récupération des filtres depuis le fichier filters.js
-function getFilters() {
+    DisplayAll(recipes);
+  }
 
-    const filters = {
-        ingredients: ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
-        appliances: ["Appliance 1", "Appliance 2", "Appliance 3"],
-        ustensils: ["Ustensil 1", "Ustensil 2", "Ustensil 3"],
+  init();
+
+  function getDataApi() {
+    return fetch('http://localhost:5501/data/recipes.json')
+      .then(function (response) {
+        return response.json();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function DisplayAll(recipes) {
+    displayData();
+    displayHeader();
+    displayFilters();
+  }
+
+  function displayData() {
+    const recipesSection = document.getElementsByClassName("recipesCard")[0];
+    recipesSection.innerHTML = '';
+    newRecipes.forEach((recipe) => {
+      const recipeModel = recipesFactory(recipe);
+      const recipeCardDOM = recipeModel.getRecipesCardDOM();
+      recipesSection.appendChild(recipeCardDOM);
+    });
+  }
+
+  function displayFilters() {
+    const filtersSection = document.querySelector(".filtersCard");
+    filtersSection.innerHTML = "";
+
+    // Récupération des ingrédients, appareils et ustensiles uniques
+    const uniqueIngredients = [...new Set(newRecipes.flatMap(recipe => recipe.ingredients.map(ingredient => ingredient.ingredient)))];
+    const uniqueAppliances = [...new Set(newRecipes.map(recipe => recipe.appliance))];
+    const uniqueUstensils = [...new Set(newRecipes.flatMap(recipe => recipe.ustensils))];
+
+    const filtersCard = document.createElement("div");
+    filtersCard.className = "dropdown-wrapper";
+    filtersCard.innerHTML = `
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Ingrédients
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <form class="px-4 py-3">
+              <input id="searchIngredient" type="search" class="form-control">
+            </form>
+          </li>
+          ${uniqueIngredients.map(ingredient => `<li><a class="dropdown-item" href="#">${ingredient}</a></li>`).join("")}
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Appareils
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <form class="px-4 py-3">
+              <input id="searchAppliance" type="search" class="form-control">
+            </form>
+          </li>
+          ${uniqueAppliances.map(appliance => `<li><a class="dropdown-item" href="#">${appliance}</a></li>`).join("")}
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Ustensiles
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <form class="px-4 py-3">
+              <input id="searchUstensil" type="search" class="form-control">
+            </form>
+          </li>
+          ${uniqueUstensils.map(ustensil => `<li><a class="dropdown-item" href="#">${ustensil}</a></li>`).join("")}
+        </ul>
+      </div>
+      <div class="recipe-count">
+
+      </div>
+    `;
+
+    filtersSection.appendChild(filtersCard);
+
+    // Afficher le nombre de recettes
+    const selectedFilters = document.createElement("div");
+    selectedFilters.classList.add("selected-filters");
+    filtersSection.appendChild(selectedFilters);
+
+    // Afficher le nombre de recettes
+    let displayedRecipesCount = newRecipes.length;
+
+    const dropdownItems = document.querySelectorAll(".dropdown-item"); // Récupérer tous les éléments de la liste déroulante
+    dropdownItems.forEach(item => { // Parcourir tous les éléments de la liste déroulante
+      item.addEventListener("click", () => { // Ajouter un gestionnaire d'événement click à chaque élément
+        const filterType = item.parentNode.parentNode.previousElementSibling.textContent.trim(); // Récupérer le type de filtre
+        const filterValue = item.textContent.trim().toLowerCase(); // Récupérer la valeur du filtre
+
+        // Filtrer les recettes en fonction de l'élément cliqué
+        newRecipes = newRecipes.filter(recipe => {
+          switch (filterType) {
+            case "Ingrédients":
+              // Vérifier si l'ingrédient est présent dans la liste des ingrédients de la recette
+              return recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(filterValue));
+            case "Appareils":
+              // Vérifier si l'appareil est présent dans la liste des appareils de la recette
+              return recipe.appliance.toLowerCase().includes(filterValue);
+            case "Ustensiles":
+              // Vérifier si l'ustensile est présent dans la liste des ustensiles de la recette
+              return recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(filterValue));
+            default:
+              return true;
+          }
+        });
+
+        // Mettre à jour le nombre de recettes affichées
+        displayedRecipesCount = newRecipes.length;
+
+        // Mettre à jour la liste des recettes affichées
+        displayData();
+
+        // Mettre à jour le filtre sélectionné
+        const selectedFilter = document.createElement("div");
+        selectedFilter.classList.add("selected-filter");
+        selectedFilter.innerHTML = `
+        <span>${filterValue}</span>
+        <button class="btn-close" type="button"></button>
+      `;
+        selectedFilters.appendChild(selectedFilter); // Ajouter le filtre sélectionné à la liste des filtres sélectionnés
+
+        const closeButton = selectedFilter.querySelector(".btn-close");
+        closeButton.addEventListener("click", () => {
+          // Supprimer le filtre sélectionné
+          selectedFilter.remove();
+
+          // Réinitialiser les recettes filtrées
+          newRecipes = recipes;
+
+          // Réafficher toutes les recettes
+          displayData(newRecipes);
+        });
+        const recipeCount = filtersCard.querySelector(".recipe-count");
+        recipeCount.textContent = `${displayedRecipesCount} recettes`;
+      });
+    });
+
+    // Filtrer les recettes en fonction des valeurs saisies dans les champs de recherche
+    const searchIngredient = document.getElementById("searchIngredient");
+    const searchAppliance = document.getElementById("searchAppliance");
+    const searchUstensil = document.getElementById("searchUstensil");
+
+
+    const filterRecipes = () => {
+      let filteredRecipes = newRecipes;
+
+      if (searchIngredient) {
+        const value = searchIngredient.value.toLowerCase();
+        filteredRecipes = filteredRecipes.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(value)));
+      }
+
+      if (searchAppliance) {
+        const value = searchAppliance.value.toLowerCase();
+        filteredRecipes = filteredRecipes.filter(recipe => recipe.appliance.toLowerCase().includes(value));
+      }
+
+      if (searchUstensil) {
+        const value = searchUstensil.value.toLowerCase();
+        filteredRecipes = filteredRecipes.filter(recipe => recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(value)));
+      }
+
+      newRecipes = filteredRecipes;
+      displayData();
     };
 
-    return filters;
-}
-
-// Affichage des recettes dans la page
-function displayRecipes(recipes) {
-    const recipesContainer = document.querySelector(".recipes");
-    recipesContainer.innerHTML = "";
-
-    if (Array.isArray(recipes)) {
-        recipes.forEach((recipe) => {
-            const recipeCard = createRecipeCard(recipe);
-            recipesContainer.appendChild(recipeCard);
-        });
+    if (searchIngredient) {
+      searchIngredient.addEventListener("input", filterRecipes);
     }
-}
 
-// Affichage des filtres ingrédients appareils ustensiles
-function displayFilters(filters) {
-    const filtersContainer = document.querySelector(".filters");
-    filtersContainer.innerHTML = "";
+    if (searchAppliance) {
+      searchAppliance.addEventListener("input", filterRecipes);
+    }
 
-    const ingredientsContainer = document.createElement("div");
-    ingredientsContainer.classList.add("filters__ingredients");
-    ingredientsContainer.innerHTML = `
-        <h3 class="filters__title">Ingrédients</h3>
-        <div class="filters__list"></div>
-    `;
-    filtersContainer.appendChild(ingredientsContainer);
+    if (searchUstensil) {
+      searchUstensil.addEventListener("input", filterRecipes);
+    }
 
-    const appliancesContainer = document.createElement("div");
-    appliancesContainer.classList.add("filters__appliances");
-    appliancesContainer.innerHTML = `
-        <h3 class="filters__title">Appareils</h3>
-        <div class="filters__list"></div>
-    `;
-    filtersContainer.appendChild(appliancesContainer);
+    const dropdownButtons = document.querySelectorAll(".dropdown-toggle");
 
-    const ustensilsContainer = document.createElement("div");
-    ustensilsContainer.classList.add("filters__ustensils");
-    ustensilsContainer.innerHTML = `
-        <h3 class="filters__title">Ustensiles</h3>
-        <div class="filters__list"></div>
-    `;
-    filtersContainer.appendChild(ustensilsContainer);
-
-    filters.ingredients.forEach((ingredient) => {
-        const ingredientItem = document.createElement("div");
-        ingredientItem.classList.add("filters__item");
-        ingredientItem.innerHTML = `
-            <input type="checkbox" id="${ingredient}" name="${ingredient}" value="${ingredient}">
-            <label for="${ingredient}">${ingredient}</label>
-        `;
-        ingredientsContainer.querySelector(".filters__list").appendChild(ingredientItem);
+    // Ouvrir le menu déroulant au clic
+    dropdownButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const dropdownMenu = button.nextElementSibling;
+        dropdownMenu.classList.toggle("show");
+      });
     });
 
-    filters.appliances.forEach((appliance) => {
-        const applianceItem = document.createElement("div");
-        applianceItem.classList.add("filters__item");
-        applianceItem.innerHTML = `
-            <input type="checkbox" id="${appliance}" name="${appliance}" value="${appliance}">
-            <label for="${appliance}">${appliance}</label>
-        `;
-        appliancesContainer.querySelector(".filters__list").appendChild(applianceItem);
+    // Fermer le menu déroulant si l'utilisateur clique en dehors
+    window.addEventListener("click", event => {
+      dropdownButtons.forEach(button => {
+        if (!button.contains(event.target)) {
+          const dropdownMenu = button.nextElementSibling;
+          dropdownMenu.classList.remove("show");
+        }
+      });
     });
+  }
 
-    filters.ustensils.forEach((ustensil) => {
-        const ustensilItem = document.createElement("div");
-        ustensilItem.classList.add("filters__item");
-        ustensilItem.innerHTML = `
-            <input type="checkbox" id="${ustensil}" name="${ustensil}" value="${ustensil}">
-            <label for="${ustensil}">${ustensil}</label>
-        `;
-        ustensilsContainer.querySelector(".filters__list").appendChild(ustensilItem);
-    });
-}
+});
 
-// Export des fonctions requises
-window.createRecipeCard = createRecipeCard;
-window.displayFilters = displayFilters;
-window.getFilters = getFilters;
