@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "node": "^19.8.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  },
+  "scripts": {
+    "//": "lancer plus facilement ESLint.",
+    "lint": "eslint ./"
+  }
+}

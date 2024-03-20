@@ -1,0 +1,772 @@
+General Rules * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat';
+}
+
+:root {
+  --color-primary: white;
+  --color-secondary: #ffd15b;
+  --color-black: #2e3333;
+  --color-dark-black: #1b1b1b;
+  --color-grey: #7a7a7a;
+  --color-grey-white: #ededed;
+  --color-red: #ff0000;
+}
+
+html {
+  background-color: var(--color-grey-white);
+}
+
+/*Afin que les images ne débordent jamais*/
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-primary);
+  color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-width: 400px;
+  /* width: 100%; */
+}
+
+/*header*/
+
+.container-logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.container-header {
+  background-image: url('../assets//images//background-header.png');
+  background-size: cover;
+  height: 667px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-header {
+  color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  font-family: Anton;
+  font-size: 35px;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 66px;
+  letter-spacing: 0em;
+  text-align: center;
+  width: 50%;
+}
+
+/*container rechercher nav*/
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.container-search {
+  position: relative;
+}
+
+.clear-inputNav {
+  position: absolute;
+  right: 75px;
+  display: none;
+  cursor: pointer;
+}
+
+.inputIconContainer {
+  position: relative;
+}
+
+.closeInputFilter {
+  width: 70%;
+  display: none;
+}
+
+.clear-inputFilter {
+  position: absolute;
+  right: 25px;
+  top: 7px;
+}
+
+.input-search {
+  width: 954px;
+  border-radius: 11px;
+  color: var(--color-grey);
+  position: relative;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 25px;
+}
+
+.container-icon {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.icon-search {
+  background-color: var(--color-dark-black);
+  width: 51px;
+  height: 52px;
+  position: absolute;
+  border-radius: 10px;
+  top: 10px;
+  right: 10px;
+}
+
+.main {
+  background-color: var(--color-grey-white);
+  width: 100%;
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-top-main {
+  width: 85%;
+  display: flex;
+  background-color: var(--color-grey-white);
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.container-filters {
+  width: 735px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container-numbersOfRecipes {
+  font-family: 'Anton';
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+  right: 0px;
+  top: 5px;
+}
+
+/*container selected tag option INGREDIENT*/
+.wrapper-tag-selected-ingredient {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tag-selected-ingredient {
+  height: 53px;
+  background-color: var(--color-secondary);
+  border-radius: 10px;
+  list-style: none;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+p.selected-option-ingredient {
+  display: flex;
+  justify-content: center;
+}
+
+.container-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.clear-inputOption {
+  cursor: pointer;
+}
+
+/*Card pour les recettes*/
+
+.card-recipes-bottom-main {
+  height: 800px;
+  background-color: var(--color-grey-white);
+  width: 87%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 380px;
+  height: 680px;
+  border-radius: 21px;
+  background-color: var(--color-primary);
+  margin-bottom: 50px;
+}
+
+.container-top {
+  height: 253px;
+  position: relative;
+}
+
+.duration-recipes {
+  background-color: var(--color-secondary);
+  border-radius: 20px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px 15px 5px 15px;
+}
+
+.img-recipes {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.container-bottom {
+  padding: 20px;
+}
+
+.name-title-recipes {
+  font-family: Anton;
+  font-size: 18px;
+  color: var(--color-dark-black);
+}
+
+.title-recipes,
+.title-ingredients {
+  color: var(--color-grey);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+h4.title-recipes {
+  text-transform: uppercase;
+}
+
+h5.title-ingredients {
+  text-transform: uppercase;
+}
+
+.instructions-recipes {
+  color: var(--color-dark-black);
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.12px;
+}
+
+p.instructions-recipes {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.all-items-ingredients {
+  display: flex;
+  width: 100%;
+  height: 13rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: -15px;
+}
+
+.ingredient-name {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-family: Manrope;
+  font-weight: 500;
+}
+
+.quantity-item-ingredients {
+  color: var(--color-grey);
+}
+
+span.ingredient-quantity {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-grey);
+  font-family: Manrope;
+}
+
+/** dropdown**/
+.hide-ingredient {
+  max-height: 0 !important;
+}
+
+.dropdown-ingredient,
+.dropdown-appliance,
+.dropdown-ustensil {
+  border: 0.1em solid var(--color-primary);
+  margin: 15px 0 1em;
+  border-radius: 11px;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  width: 200px;
+}
+
+.dropdown-ingredient .menu-ingredient {
+  transition: max-height 0.5s ease-out;
+  max-height: 20em;
+  overflow: hidden;
+}
+
+.dropdown-ingredient .menu-ingredient .ingredient-option {
+  margin-top: 0.3em;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.dropdown-ingredient .menu-ingredient .ingredient-option:hover {
+  background: var(--color-secondary);
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.dropdown-ingredient .title-ingredient {
+  width: 100%;
+}
+
+/* Style de l'icône de chevron */
+.dropdown-ingredient .title-ingredient .fa-angle-down {
+  float: right;
+  margin-right: 0.7em;
+  transition: transform 0.3s;
+  margin: 0;
+}
+
+/* Lorsque le dropdown est actif (classe "active") */
+.dropdown-ingredient.active-ingredient .title-ingredient .fa-angle-down {
+  transform: rotate(180deg);
+  margin: 0;
+}
+
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.input-searchInputFilter {
+  padding: 8px;
+}
+
+span.container-iconSearch {
+  position: absolute;
+  right: 5px;
+  top: 9px;
+}
+
+.container-option-ingredient {
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-left: 0;
+}
+
+.title-ingredient.pointerCursor {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 21.86px;
+  font-weight: 500;
+  font-family: Manrope;
+  justify-content: space-between;
+}
+
+.title-ingredient.pointerCursor {
+  padding: 15px;
+  width: 85%;
+}
+
+.pointerCursor:hover {
+  cursor: pointer;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.option {
+  font-size: 14px;
+  line-height: 19.12px;
+  font-family: Manrope;
+  font-weight: 400;
+}
+
+/** dropdown appliance**/
+.hide-appliance {
+  max-height: 0 !important;
+}
+
+.dropdown-appliance .menu-appliance {
+  transition: max-height 0.5s ease-out;
+  max-height: 20em;
+  overflow: hidden;
+}
+
+.dropdown-appliance .menu-appliance .appliance-option {
+  margin-top: 0.3em;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.dropdown-appliance .menu-appliance .appliance-option:hover {
+  background: var(--color-secondary);
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.dropdown-appliance .title-appliance {
+  width: 100%;
+}
+
+/* Style de l'icône de chevron */
+.dropdown-appliance .title-appliance .fa-angle-down {
+  float: right;
+  margin-right: 0.7em;
+  transition: transform 0.3s;
+  margin: 0;
+}
+
+/* Lorsque le dropdown est actif (classe "active") */
+.dropdown-appliance.active-appliance .title-appliance .fa-angle-down {
+  transform: rotate(180deg);
+  margin: 0;
+}
+
+.search-container-appliance {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.input-searchInputFilterAppliance {
+  padding: 8px;
+}
+
+span.container-iconSearchAppliance {
+  position: absolute;
+  right: 5px;
+  top: 9px;
+}
+
+.container-option-appliance {
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-left: 0;
+}
+
+.title-appliance.pointerCursorAppliance {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 21.86px;
+  font-weight: 500;
+  font-family: Manrope;
+  justify-content: space-between;
+}
+
+.title-appliance.pointerCursorAppliance {
+  padding: 15px;
+  width: 85%;
+}
+
+.pointerCursor-appliance:hover {
+  cursor: pointer;
+}
+
+.rotateAppliance-90 {
+  transform: rotate(90deg);
+}
+
+.option-appliance {
+  font-size: 14px;
+  line-height: 19.12px;
+  font-family: Manrope;
+  font-weight: 400;
+}
+
+/*container selected option APPLIANCE*/
+.wrapper-tag-selected-appliance {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tag-selected-appliance {
+  height: 53px;
+  background-color: var(--color-secondary);
+  border-radius: 10px;
+  list-style: none;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+p.selected-option-appliance {
+  display: flex;
+  justify-content: center;
+}
+
+.container-text-appliance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.clear-inputOptionAppliance {
+  cursor: pointer;
+}
+
+/** dropdown ustensil**/
+.hide-ustensil {
+  max-height: 0 !important;
+}
+
+.dropdown-ustensil .menu-ustensil {
+  transition: max-height 0.5s ease-out;
+  max-height: 20em;
+  overflow: hidden;
+}
+
+.dropdown-ustensil .menu-ustensil .ustensil-option {
+  margin-top: 0.3em;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.dropdown-ustensil .menu-ustensil .ustensil-option:hover {
+  background: var(--color-secondary);
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.dropdown-ustensil .title-ustensil {
+  width: 100%;
+}
+
+/* Style de l'icône de chevron */
+.dropdown-ustensil .title-ustensil .fa-angle-down {
+  float: right;
+  margin-right: 0.7em;
+  transition: transform 0.3s;
+  margin: 0;
+}
+
+/* Lorsque le dropdown est actif (classe "active") */
+.dropdown-ustensil.active-ustensil .title-ustensil .fa-angle-down {
+  transform: rotate(180deg);
+  margin: 0;
+}
+
+.search-container-ustensil {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.input-searchInputFilterUstensil {
+  padding: 8px;
+}
+
+span.container-iconSearchUstensil {
+  position: absolute;
+  right: 5px;
+  top: 9px;
+}
+
+.container-option-ustensil {
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-left: 0;
+}
+
+.title-ustensil.pointerCursorUstensil {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 21.86px;
+  font-weight: 500;
+  font-family: Manrope;
+  justify-content: space-between;
+}
+
+.title-ustensil.pointerCursorUstensil {
+  padding: 15px;
+  width: 85%;
+}
+
+.pointerCursor-ustensil:hover {
+  cursor: pointer;
+}
+
+.rotateUstensil-90 {
+  transform: rotate(90deg);
+}
+
+/*container selected option USTENSIL*/
+.wrapper-tag-selected-ustensil {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tag-selected-ustensil {
+  height: 53px;
+  background-color: var(--color-secondary);
+  border-radius: 10px;
+  list-style: none;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+p.selected-option-ustensil {
+  display: flex;
+  justify-content: center;
+}
+
+.container-text-ustensil {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.clear-inputOptionUstensil {
+  cursor: pointer;
+}
+
+/*info no match message*/
+.container-info-no-match-message {
+  display: flex;
+  justify-content: center;
+}
+
+.info-no-match-message {
+  display: flex;
+  justify-content: center;
+  color: var(--color-red);
+  padding: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: var(--color-primary);
+  max-width: 940px;
+}
+
+/*Medias querries- Gestion du Responsive*/
+/* Styles pour les écrans jusqu'à 600 pixels de large */
+@media only screen and (max-width: 600px) {
+  .title-header {
+    font-size: 18px;
+  }
+  .input-search {
+    width: 225px;
+    font-size: 10px;
+  }
+  .container-filters {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .container-numbersOfRecipes {
+    position: relative;
+  }
+  .filter-top-main {
+    flex-direction: column;
+  }
+  .card-recipes-bottom-main {
+    justify-content: center;
+  }
+  .icon-search {
+    top: 6px;
+  }
+}
+
+/*Medias querries- Responsive*/
+/* Styles pour les écrans de 600 à 1000 pixels de large */
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+  .input-search {
+    width: 350px;
+  }
+  .container-numbersOfRecipes {
+    left: 0px;
+    top: -35px;
+  }
+
+  .filter-top-main {
+    margin-top: 20px;
+  }
+}
+
+/*Medias querries - Responsive*/
+/* Styles pour les écrans de 1000 à 1400 pixels de large */
+@media screen and (min-width: 1000px) and (max-width: 1400px) {
+  .title-header {
+    font-size: 20px;
+  }
+  .input-search {
+    width: 450px;
+  }
+}

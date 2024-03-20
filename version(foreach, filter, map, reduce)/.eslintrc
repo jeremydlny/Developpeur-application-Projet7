@@ -1,0 +1,32 @@
+{
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      // autorise l'utilisation des fonctionnalités de type spread pour les objets.
+      "experimentalObjectRestSpread": true
+    },
+    // Indique que le code doit être traité comme des modules (plutôt que du code de script) conformément à ECMAScript Modules (ESM).
+    "sourceType": "module",
+    // Spécifie le parser à utiliser, ici il s'agit du parser ESLint fourni par Babel.
+    "parser": "@babel/eslint-parser"
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "scripts": {
+    // Permet d'utiliser npm run
+    "eslint": "eslint . --fix"
+  },
+  // Configuration actuelle + hérite des règles recommandées par ESLint.
+  "extends": ["eslint:recommended"],
+  "rules": {
+    //  lorsque l'égalité stricte (===) n'est pas utilisée.
+    "eqeqeq": "warn",
+    //  lorsque l'indentation n'est pas de 2 espaces.
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    // Avertit lorsque les opérateurs ternaires sont répartis sur plusieurs lignes,
+    "multiline-ternary": ["warn", "always-multiline"]
+  }
+}

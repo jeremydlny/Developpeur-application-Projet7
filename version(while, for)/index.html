@@ -1,0 +1,147 @@
+<!-- <html> -->
+    <!DOCTYPE html>
+    <html lang="fr">
+    
+        <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+            <link href="css/index.css" rel="stylesheet" type="text/css" />
+            <link rel="icon" type="image/png" href="assets/icons/logo.ico">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+            <title>Les petits plats</title>
+        </head>
+    
+        <body>
+            <header class="container-header">
+                <div class="container-logo"><img src="assets/images/logo.png" alt="Les petits plats" /></div>
+                <nav class="nav">
+                    <h2 class="title-header">Cherchez parmi plus de 1500 recettes du quotidien simples et délicieuses</h2>
+                    <div class="container-search">
+                        <div class="input-container">
+                            <input class="input-search" placeholder="Rechercher une recette un ingrédient..." type="text"
+                                id="inputNav" required minlength="4" maxlength="25" size="10" />
+                            <span class="clear-inputNav" id="clearInputNav"><img src="assets/icons/icon-close.png"
+                                    alt="Fermer" /></span>
+                        </div>
+                        <div class="icon-search">
+                            <div class="container-icon"> <img src="assets/images/icon-search.png" alt="Chercher"
+                                    height="96" />
+                            </div>
+    
+                        </div>
+                    </div>
+                </nav>
+                <div class="no-match-message" style="display: none;">
+                    <div class="container-info-no-match-message">
+                        <p class="info-no-match-message"> Aucune recette ne contient '<span id="searchTerm"></span>', vous
+                            pouvez chercher « tarte aux pommes
+                            », «
+                            poisson », etc.</p>
+                    </div>
+    
+                </div>
+            </header>
+            <main class="main">
+                <section class="filter-top-main">
+                    <div class="container-filters">
+                        <!-- INGREDIENTS -->
+                        <div class="container-dropdown">
+                            <div class="dropdown-ingredient">
+                                <div class="title-ingredient pointerCursor active-ingredient">Ingrédients <i
+                                        class="fas fa-angle-down"></i></div>
+                                <div class='menu-ingredient pointerCursor hide-ingredient'>
+                                    <div class="search-container">
+                                        <div class="inputIconContainer">
+                                            <input class="input-searchInputFilter" type="text"
+                                                id="searchInputFilterIngredient" placeholder="Rechercher...">
+                                            <span class="clear-inputFilter" id="clearInputFilterIngredient"><img
+                                                    class="closeInputFilter" src="assets/icons/icon-close.png"
+                                                    alt="Fermer" /></span>
+                                            <span class="container-iconSearch"> <i class="fas fa-search"></i></span>
+                                        </div>
+                                    </div>
+                                    <ul class="container-option-ingredient" id="ingredientOptions"></ul>
+                                </div>
+                            </div>
+                            <ul class="wrapper-tag-selected-ingredient">
+                            </ul>
+                        </div>
+                        <!-- FIN INGREDIENTS -->
+    
+                        <!-- APPAREILS -->
+                        <div class="container-dropdown">
+                            <div class="dropdown-appliance">
+                                <div class="title-appliance pointerCursorAppliance active-appliance">Appareils <i
+                                        class="fas fa-angle-down"></i>
+                                </div>
+                                <div class='menu-appliance pointerCursor hide-appliance'>
+                                    <div class="search-container-appliance">
+                                        <div class="inputIconContainer">
+                                            <input class="input-searchInputFilterAppliance" type="text"
+                                                id="searchInputFilterAppliance" placeholder="Rechercher...">
+                                            <span class="clear-inputFilter" id="clearInputFilterAppliance"><img
+                                                    class="closeInputFilter" src="assets/icons/icon-close.png"
+                                                    alt="Fermer" /></span>
+                                            <span class="container-iconSearchAppliance"> <i
+                                                    class="fas fa-search"></i></span>
+                                        </div>
+                                    </div>
+                                    <ul class="container-option-appliance" id="applianceOptions"></ul>
+                                </div>
+                            </div>
+                            <ul class="wrapper-tag-selected-appliance">
+                            </ul>
+                        </div>
+                        <!-- FIN APPAREILS -->
+    
+                        <!-- USTENSILES -->
+                        <div class="container-dropdown">
+                            <div class="dropdown-ustensil">
+                                <div class="title-ustensil pointerCursorUstensil active-ustensil">Ustensiles <i
+                                        class="fas fa-angle-down"></i>
+                                </div>
+                                <div class='menu-ustensil pointerCursor hide-ustensil'>
+                                    <div class="search-container-ustensil">
+                                        <div class="inputIconContainer">
+                                            <input class="input-searchInputFilterUstensil" type="text"
+                                                id="searchInputFilterUstensil" placeholder="Rechercher...">
+                                            <span class="clear-inputFilter" id="clearInputFilterUstensil"><img
+                                                    class="closeInputFilter" src="assets/icons/icon-close.png"
+                                                    alt="Fermer" /></span>
+                                            <span class="container-iconSearchUstensil"> <i class="fas fa-search"></i></span>
+                                        </div>
+                                    </div>
+                                    <ul class="container-option-ustensil" id="ustensilOptions"></ul>
+                                </div>
+                            </div>
+                            <ul class="wrapper-tag-selected-ustensil"></ul>
+                        </div>
+                        <!-- FIN USTENSILES -->
+    
+                    </div>
+                    <p class="container-numbersOfRecipes"><span id="numbersOfRecipes"></span> recettes</p>
+                </section>
+                <section class="card-recipes-bottom-main">
+                </section>
+            </main>
+            <!-- Api -->
+            <script type="module" src="./scripts/api/Api.js"></script>
+            <!-- Entry point -->
+            <script type="module" src="./scripts/index.js"></script>
+            <!-- UI -->
+            <script type="module" src="./scripts/ui/recipeCard.js"></script>
+            <!-- Components -->
+            <script type="module" src="./scripts/components/dropdown.js"></script>
+            <script type="module" src="./scripts/components/filters.js"></script>
+            <script type="module" src="./scripts/components/filterTags.js"></script>
+            <!-- Utils -->
+            <script type="module" src="./scripts/utils/formatData.js"></script>
+    
+        </body>
+    
+    </html>

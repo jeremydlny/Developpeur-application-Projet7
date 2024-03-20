@@ -1,0 +1,23 @@
+{
+  "env": {
+    // Signifie que le code est destiné à s'exécuter dans un environnement de navigateur web.
+    "browser": true,
+    // Indique que le code peut s'exécuter dans un environnement Node.js.
+    "node": true,
+    "es2021": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    // Indique que les points-virgules (;) doivent toujours être présents
+    "semi": ["error", "always"],
+    // exemple afin de simuler une erreur
+    // "quotes": ["error", "single"],
+
+    // Ignorer les console.log dans le fichier JS afin de pouvoir l'utiliser sans provoquer d'erreur
+    "no-console": "off"
+  }
+}
