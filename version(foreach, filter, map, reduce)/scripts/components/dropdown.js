@@ -58,7 +58,7 @@ function toggleClass(element, className) {
  * Ouvre ou ferme le menu FILTRE INGREDIENT en modifiant les classes CSS des éléments.
  * @param {MouseEvent} event - L'événement déclencheur de la fonction.
  */
-function toggleMenuDisplayIngredient(event) {
+function toggleMenuDisplayIngredient(event) { // Fonction qui gère l'ouverture et la fermeture du menu ingrédient
   const dropdown = event.currentTarget.closest('.dropdown-ingredient');
   const menu = dropdown.querySelector('.menu-ingredient');
   const icon = dropdown.querySelector('.fa-angle-down');
@@ -72,7 +72,7 @@ function toggleMenuDisplayIngredient(event) {
  * Ouvre ou ferme le menu FILTRE APPAREIL en modifiant les classes CSS des éléments.
  * @param {MouseEvent} event - L'événement déclencheur de la fonction.
  */
-function toggleMenuDisplayAppliance(event) {
+function toggleMenuDisplayAppliance(event) { // Fonction qui gère l'ouverture et la fermeture du menu appareil
   const dropdown = event.currentTarget.closest('.dropdown-appliance');
   const menu = dropdown.querySelector('.menu-appliance');
   const icon = dropdown.querySelector('.fa-angle-down');
@@ -86,7 +86,7 @@ function toggleMenuDisplayAppliance(event) {
  * Ouvre ou ferme le menu FILTRE USTENSIL en modifiant les classes CSS des éléments.
  * @param {MouseEvent} event - L'événement déclencheur de la fonction.
  */
-function toggleMenuDisplayUstensil(event) {
+function toggleMenuDisplayUstensil(event) { // Fonction qui gère l'ouverture et la fermeture du menu ustensil
   const dropdown = event.currentTarget.closest('.dropdown-ustensil');
   const menu = dropdown.querySelector('.menu-ustensil');
   const icon = dropdown.querySelector('.fa-angle-down');
